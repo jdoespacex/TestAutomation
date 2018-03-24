@@ -1,9 +1,11 @@
 package com.app.step_definitions;
 
 import java.util.List;
+
+import com.app.models.Contact;
+
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
-import models.Contact;
 
 public class DDT_within_step_stepDefs {
 
