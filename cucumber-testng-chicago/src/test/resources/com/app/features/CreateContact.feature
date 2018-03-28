@@ -3,7 +3,7 @@ Feature: Contact creation
 Background: Login to app
 Given I logged into suiteCRM
 
-@dev
+
 Scenario Outline: contact creation and validation
 And I go to create contact page
 Then I create new contact using "<prefix>" "<firstName>" "<lastName>" "<phoneNumber>" "<title>"

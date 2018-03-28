@@ -7,6 +7,8 @@ import com.app.pages.ContactPage;
 import com.app.pages.SuiteCRMDashboardPage;
 import com.app.utilities.BrowserUtils;
 import com.app.utilities.Driver;
+import com.app.utilities.ExcelUtils;
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 
@@ -48,6 +50,17 @@ public class CreateContact_stepDefs {
 		assertEquals(cPage.mobilePhoneValidation.getText(), phoneNumber, "Phone number validation");
 		assertEquals(cPage.title.getText(), title, "Title validation");
 		
+	}
+	
+	@Given("^I validate contacts with data in excel sheet \"([^\"]*)\" and \"([^\"]*)\"$")
+	public void i_validate_contacts_with_data_in_excel_sheet_and(String path, String sheet) {
+	    ExcelUtils.openExcelFile(path, sheet);
+	    for(int i =1; i < ExcelUtils.getUsedRowsCount(); i++) {
+	    		System.out.println(ExcelUtils.getCellData(i, 1));
+	    		if(ExcelUtils.getCellData(i, 1).equals("Y")) {
+	    			System.out.println(ExcelUtils.getCellData(i, 0));
+	    		}
+	    }
 	}
 }
 
