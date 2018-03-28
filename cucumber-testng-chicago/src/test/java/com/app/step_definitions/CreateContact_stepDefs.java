@@ -27,6 +27,7 @@ public class CreateContact_stepDefs {
 	@Then("^I create new contact using \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
 	public void i_create_new_contact_using(String prefix, String firstName, String lastName, String phoneNumber, String title) {
 	   
+		prefix = "Somethig Elese";
 		System.out.println("\nprefix: " + prefix);
 	    System.out.println("firstName: " + firstName);
 	    System.out.println("lastName: " + lastName);

@@ -12,8 +12,8 @@ Then I logout from application
 
 Examples:
 |prefix |	firstName| 	lastName	|	phoneNumber|title    |
-|Prof.  | James		 | Bond		| 7733334400   | 007     |	
-|Dr.   | House		 | Gred		| 			   | Brain   |	
+|Prof.  | James		 | Bond		| 7733334400   | 007     |
+|Dr.   | House		 | Gred		| 			   | Brain   |
 
 
 Scenario: CRM Name and Modules
