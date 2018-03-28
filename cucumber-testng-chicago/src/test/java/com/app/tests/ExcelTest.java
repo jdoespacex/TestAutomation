@@ -27,7 +27,7 @@ public class ExcelTest {
 		System.out.println(cell1);
 		XSSFCell cellToChange = sheet.getRow(1).getCell(3);
 		System.out.println("Before: " + cellToChange);
-		
+		System.out.println(sheet.getPhysicalNumberOfRows());
 		
 		
 		

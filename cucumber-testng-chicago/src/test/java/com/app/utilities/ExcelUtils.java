@@ -64,9 +64,13 @@ public class ExcelUtils {
 	// parameters
 	public static void setCellData(String value, int rowNum, int colNum) {
 		try {
+			
 			row = excelWSheet.getRow(rowNum);
 			cell = row.getCell(colNum);
-
+			
+			if(row == null) {
+				row = excelWSheet.createRow(rowNum);
+			}
 			if (cell == null) {
 				cell = row.createCell(colNum);
 				cell.setCellValue(value);
