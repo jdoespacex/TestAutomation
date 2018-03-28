@@ -31,7 +31,7 @@ public class ExcelUtils {
 			excelWSheet = excelWBook.getSheet(sheetName);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Opening file catch");
 		}
 	}
 
@@ -52,7 +52,7 @@ public class ExcelUtils {
 			String cellData = cell.toString();
 			return cellData;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Non existing cell");
 			return "";
 		}
 	}
@@ -64,13 +64,16 @@ public class ExcelUtils {
 	// parameters
 	public static void setCellData(String value, int rowNum, int colNum) {
 		try {
+			if(excelWSheet.getPhysicalNumberOfRows() < rowNum) {
+				System.out.println("row creation");
+				row = excelWSheet.createRow(rowNum);
+			}else {
+				row = excelWSheet.getRow(rowNum);
+			}
 			
-			row = excelWSheet.getRow(rowNum);
 			cell = row.getCell(colNum);
 			
-			if(row == null) {
-				row = excelWSheet.createRow(rowNum);
-			}
+			
 			if (cell == null) {
 				cell = row.createCell(colNum);
 				cell.setCellValue(value);
@@ -83,7 +86,7 @@ public class ExcelUtils {
 
 			fileOut.close();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Failed to write data");
 		}
 	}
 
