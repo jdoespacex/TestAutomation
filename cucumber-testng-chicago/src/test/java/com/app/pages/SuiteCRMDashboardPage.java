@@ -52,9 +52,19 @@ public class SuiteCRMDashboardPage {
 	
 	@FindBy(linkText = "Create Contact")
 	public WebElement createContactOption;
+//	//table[@class='list View']//td[.='John Doe']
+	
+	@FindBy(id = "searchFieldMain")
+	public WebElement searchInput;
+	
+	@FindBy(xpath = "//div[@class='desktop-bar']//form[@id='searchform']//button")
+	public WebElement searchBtn;
+	
+	
 	
 	
 	public void logout() {
+		BrowserUtils.waitFor(2);
 		Actions action = new Actions(driver);
 		action.moveToElement(profileMenu);
 		action.perform();

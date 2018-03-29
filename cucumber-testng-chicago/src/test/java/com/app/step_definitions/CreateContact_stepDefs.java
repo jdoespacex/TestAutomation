@@ -2,6 +2,12 @@ package com.app.step_definitions;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import com.app.pages.ContactPage;
 import com.app.pages.SuiteCRMDashboardPage;
@@ -55,10 +61,25 @@ public class CreateContact_stepDefs {
 	@Given("^I validate contacts with data in excel sheet \"([^\"]*)\" and \"([^\"]*)\"$")
 	public void i_validate_contacts_with_data_in_excel_sheet_and(String path, String sheet) {
 	    ExcelUtils.openExcelFile(path, sheet);
-	    for(int i =1; i < ExcelUtils.getUsedRowsCount(); i++) {
-	    		System.out.println(ExcelUtils.getCellData(i, 1));
-	    		if(ExcelUtils.getCellData(i, 1).equals("Y")) {
-	    			System.out.println(ExcelUtils.getCellData(i, 0));
+	    SuiteCRMDashboardPage dash = new SuiteCRMDashboardPage();
+	    for(int row =1; row < ExcelUtils.getUsedRowsCount(); row++) {
+	    		
+	    		if(ExcelUtils.getCellData(row, 1).equals("Y")) {
+	    			String tempContact = ExcelUtils.getCellData(row, 0);
+	    			dash.searchBtn.click();
+	    			dash.searchInput.clear();
+	    			dash.searchInput.sendKeys(tempContact + Keys.ENTER);
+	    			String xpath = "//table[@class='list View']//a[.='" + tempContact+"']";
+	    			List<WebElement> results = Driver.getDriver().findElements(By.xpath(xpath));
+	    			if(results.size() > 0) {
+	    				ExcelUtils.setCellData("PASS", row, 2);
+	    			}
+	    			else {
+	    				ExcelUtils.setCellData("FAIL", row, 2);
+	    			}
+	    		}
+	    		else {
+	    			ExcelUtils.setCellData("Skipped", row, 2);
 	    		}
 	    }
 	}
